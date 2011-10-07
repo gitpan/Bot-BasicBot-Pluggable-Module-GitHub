@@ -11,7 +11,7 @@ use base 'Bot::BasicBot::Pluggable::Module';
 use strict;
 use Net::GitHub::V2;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # We'll cache suitably-configured Net::GitHub objects for each channel.
 my %net_github;
@@ -110,8 +110,8 @@ sub said {
     if ($mess->{body} =~ m{
         ^!setgithubproject \s+
         (?<channel> \#\S+ ) \s+
-        (?<project> \S+   ) \s+
-        (?<auth>    \S+   )?
+        (?<project> \S+   )
+        ( \s+ (?<auth>  \S+ ) )?
     }xi) {
         my $project_for_channel = 
             $self->store->get('GitHub','project_for_channel') || {};
@@ -130,6 +130,12 @@ sub said {
         # Invalidate any cached Net::GitHub object we might have, so the new
         # settings are used
         delete $net_github{$+{project}};
+
+        my $message = "OK, project for $+{channel} set to $+{project}";
+        if ($+{auth}) {
+            $message .= " (using auth details supplied)";
+        }
+        return $message;
 
     } elsif ($mess->{body} =~ /^!setgithubproject/i) {
         return "Invalid usage.   Try '!help github'";

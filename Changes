@@ -1,13 +1,20 @@
 Revision history for Bot-BasicBot-Pluggable-Module-GitHub
 
-0.01    2011-05-03
-        First version.  These are modules I've been using in #dancer on
-        irc.perl.org, and I figured it would be helpful to package them up and
-        release them to CPAN.
+0.02    2011-10-07
+        [ BUG FIXES ]
+        Check for failure properly before attempting to announce a
+        commit.  (Previously we checked we got something non-false back; if we
+        asked for a commit that wasn't found, we get a hashref with an error
+        key, so check for that.)
+        
+        Auth info should be optional when using !setgithubproject.  Public
+        projects of course do not require auth, but due to a fuckup in the
+        regex, it would not recognise it otherwise.
 
-        I have further plans to implement, including a module to handle GitHub
-        hooks by spawning a super-basic web server on a configured port which
-        would receive JSON payloads from GitHub's hooks and do the appropriate
-        thing (announcing commits/changed issues/pull requests/etc)
+0.01    2011-10-05
+        About time this was released; it's proven itself in #dancer on
+        irc.perl.org, and internally at my workplace, and I figured it would be 
+        helpful to package them up and release them to CPAN for anyone else who
+        would find it useful.
 
 
