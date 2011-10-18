@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Bot-BasicBot-Pluggable-Module-GitHub
-version:            0.02
+version:            0.04
 abstract:           GitHub-related modules for IRC bots running Bot::BasicBot::Pluggable
 author:
     - David Precious <davidp@preshweb.co.uk>
